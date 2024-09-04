@@ -5,10 +5,10 @@ spring:
     gateway:
       mvc:
         routes:
-          - id: user-service
-            uri: lb://user-service
+          - id: post-service
+            uri: lb://post-service
             predicates:
-              - Path=/api/v1/user/**
+              - Path=/api/v1/post/**
 server:
   port: 8080
 eureka:
