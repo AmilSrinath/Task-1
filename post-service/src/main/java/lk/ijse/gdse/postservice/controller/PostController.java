@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Amil Srinath
@@ -23,6 +24,12 @@ public class PostController {
     public String hello() {
         System.out.println("Done");
         return "Hello";
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Post>> getAllPosts() {
+        List<Post> posts = postService.getAllPosts();
+        return ResponseEntity.ok(posts);
     }
 
     @PostMapping(value = "/savePost", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

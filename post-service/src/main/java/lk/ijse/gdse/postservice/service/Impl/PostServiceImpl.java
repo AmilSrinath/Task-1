@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Amil Srinath
  */
@@ -34,5 +36,10 @@ public class PostServiceImpl implements PostService {
             post.setImage(updatedPost.getImage());
             return postServiceDAO.save(post);
         }).orElseThrow(() -> new RuntimeException("Post not found with id " + id));
+    }
+
+    @Override
+    public List<Post> getAllPosts() {
+        return postServiceDAO.findAll();
     }
 }
