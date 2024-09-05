@@ -1,11 +1,11 @@
 package lk.ijse.gdse.postservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.IOException;
 
 /**
  * @author Amil Srinath
@@ -17,8 +17,17 @@ import lombok.NoArgsConstructor;
 @Table(name = "posts")
 public class Post {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String title;
     private String description;
-    private String image;
+    @Column(columnDefinition = "LONGBLOB")
+    @Lob
+    private byte[] image;
+
+    public Post(String title, String description, byte[] imageBytes) {
+        this.title = title;
+        this.description = description;
+        this.image = imageBytes;
+    }
 }

@@ -8,4 +8,5 @@ import org.springframework.http.ResponseEntity;
  */
 public interface PostService {
     void savePost(Post post);
+    void deletePost(int id);
 }

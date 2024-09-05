@@ -21,4 +21,9 @@ public class PostServiceImpl implements PostService {
     public void savePost(Post post) {
         postServiceDAO.save(post);
     }
+
+    @Override
+    public void deletePost(int id) {
+        postServiceDAO.deleteById(String.valueOf(id));
+    }
 }
