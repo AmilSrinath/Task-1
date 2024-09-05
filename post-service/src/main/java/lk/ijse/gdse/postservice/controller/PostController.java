@@ -40,4 +40,16 @@ public class PostController {
         postService.deletePost(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping(value = "/updatePost/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Post> updatePost(
+            @PathVariable int id,
+            @RequestPart("title") String title,
+            @RequestPart("description") String description,
+            @RequestPart("image") MultipartFile image) throws IOException {
+        byte[] imageBytes = image.getBytes();
+        Post updatedPost = new Post(title, description, imageBytes);
+        Post post = postService.updatePost(id, updatedPost);
+        return ResponseEntity.ok(null);
+    }
 }

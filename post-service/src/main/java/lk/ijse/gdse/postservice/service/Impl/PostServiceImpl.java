@@ -5,7 +5,6 @@ import lk.ijse.gdse.postservice.repo.PostServiceDAO;
 import lk.ijse.gdse.postservice.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,5 +24,15 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deletePost(int id) {
         postServiceDAO.deleteById(String.valueOf(id));
+    }
+
+    @Override
+    public Post updatePost(int id, Post updatedPost) {
+        return postServiceDAO.findById(String.valueOf(id)).map(post -> {
+            post.setTitle(updatedPost.getTitle());
+            post.setDescription(updatedPost.getDescription());
+            post.setImage(updatedPost.getImage());
+            return postServiceDAO.save(post);
+        }).orElseThrow(() -> new RuntimeException("Post not found with id " + id));
     }
 }
