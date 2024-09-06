@@ -1,10 +1,10 @@
 server:
-  port: 8082
+  port: 8083
 spring:
   application:
-    name: post-service
+    name: ai-service
   datasource:
-    url: jdbc:mysql://localhost:3306/PostDB?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/AIDB?createDatabaseIfNotExist=true
     username: root
     password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver

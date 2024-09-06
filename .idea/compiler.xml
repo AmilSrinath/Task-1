@@ -11,11 +11,13 @@
         <module name="config-server" />
         <module name="post-service" />
         <module name="user-service" />
+        <module name="ai-service" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ai-service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="post-service" options="-parameters" />
