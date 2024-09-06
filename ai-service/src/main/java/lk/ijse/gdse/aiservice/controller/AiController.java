@@ -1,5 +1,6 @@
 package lk.ijse.gdse.aiservice.controller;
 
+import lk.ijse.gdse.aiservice.dto.RequestDTO;
 import lk.ijse.gdse.aiservice.model.ChatCompletionRequest;
 import lk.ijse.gdse.aiservice.model.ChatCompletionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,22 @@ public class AiController {
     }
 
     @PostMapping("/chat")
-    public String getOpenaiResponse(@RequestBody String prompt) {
-        ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest("gpt-3.5-turbo", prompt);
+    public String getOpenaiResponse(@RequestBody RequestDTO requestDTO) {
+
+        String command = "";
+        switch (requestDTO.getIndex()){
+            case 1:
+                command = "Rewrite this paragraph: " + requestDTO.getMessage();
+                break;
+            case 2:
+                command = "Summarize this paragraph: " + requestDTO.getMessage();
+                break;
+            case 3:
+                command = "Spelling correction: " + requestDTO.getMessage();
+                break;
+        }
+
+        ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest("gpt-3.5-turbo", command);
         ChatCompletionResponse response = restTemplate.postForObject("https://api.openai.com/v1/chat/completions", chatCompletionRequest, ChatCompletionResponse.class);
         return response.getChoices().get(0).getMessage().getContent();
     }
