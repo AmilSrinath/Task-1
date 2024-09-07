@@ -3,20 +3,29 @@ spring:
     name: api-gateway
   cloud:
     gateway:
-      mvc:
         routes:
           - id: post-service
             uri: lb://post-service
             predicates:
               - Path=/api/v1/post/**
+            filters:
+              - AuthenticationFilter
+
+
+
           - id: user-service
             uri: lb://user-service
             predicates:
-              - Path=/api/v1/user/**
+              - Path=/auth/**
+
+
+
           - id: ai-service
             uri: lb://ai-service
             predicates:
               - Path=/api/v1/ai/**
+            filters:
+              - AuthenticationFilter
 server:
   port: 8080
 eureka:

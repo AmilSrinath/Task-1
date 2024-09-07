@@ -1,8 +1,6 @@
 package lk.ijse.gdse.userservice.dto;
 
-import lk.ijse.gdse.userservice.entity.Role;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,10 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
-public class UserDTO {
-    private String userId;
-    private String email;
+public class AuthRequest {
+    private String username;
     private String password;
-    private Role role;
 }
